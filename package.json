@@ -20,6 +20,7 @@
     "faker": "^5.5.3",
     "immutability-helper": "^3.1.1",
     "interactjs": "^1.10.11",
+    "match-sorter": "^6.3.1",
     "material-table": "^1.69.3",
     "moment": "^2.29.1",
     "namor": "^2.0.3",
