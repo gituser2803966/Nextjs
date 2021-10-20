@@ -1,3 +1,4 @@
+//tao ra du lieu ao cho time line
 import faker from "faker";
 import randomColor from "randomcolor";
 import moment from "moment";

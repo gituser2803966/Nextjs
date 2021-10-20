@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import {
   useTable,
@@ -166,6 +167,7 @@ function SelectColumnFilter({
   // Render a multi-select box
   return (
     <select
+      className="rounded-md text-white bg-blue-600 border border-blue-500"
       value={filterValue}
       onChange={(e) => {
         setFilter(e.target.value || undefined);
@@ -445,7 +447,7 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
         </div>
       </div>
 
-      <div className="mt-1  items-center flex flex-grow">
+      <div className="mt-2 items-center flex flex-grow">
         <div className="mr-2">
           <button
             className="px-1 mr-2 bg-indigo-500"
@@ -517,7 +519,8 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
         <span>
           Page{" "}
           <strong>
-            {pageIndex + 1} of {pageOptions.length}
+            {pageIndex + 1} of{" "}
+            <span className="text-red-600">{pageOptions.length}</span>
           </strong>{" "}
         </span>
         <span>
@@ -534,6 +537,7 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
           />
         </span>
         <select
+          className="ml-2 text-white bg-blue-600 rounded-md px-1 text-sm"
           value={pageSize}
           onChange={(e) => {
             setPageSize(Number(e.target.value));

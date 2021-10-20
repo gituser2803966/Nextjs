@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import logo from "../public/vercel.svg";
+import Toast from "../components/Toast";
 
 function Login() {
+  const initState = { username: "", password: "" };
+  const [userData, setUserData] = useState(initState);
+
+  const { username, password } = userData;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    console.log(username, password);
+    e.preventDefault();
+  };
+
   return (
     <div className="h-screen bg-gradient-to-r from-blue-400 via-green-400 to-green-300  sm:w-full mx-auto items-center flex justify-center sm:mx-auto">
       <div className="bg-white mt-10 shadow rounded-lg px-8 py-8">
@@ -15,22 +31,23 @@ function Login() {
           </h2>
         </div>
 
-        <form action="#" method="POST">
+        <form action="#" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Tài khoản
             </label>
             <div className="mt-1">
               <input
                 className="w-full px-1 border rounded-md py-1 shadow-md focus:outline-none focus:border-indigo-600"
                 id="email"
-                name="email"
-                type="email"
+                name="username"
+                type="text"
                 autoComplete="email"
                 required
+                onChange={handleInputChange}
               ></input>
             </div>
           </div>
@@ -47,8 +64,8 @@ function Login() {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="password"
                 required
+                onChange={handleInputChange}
               ></input>
             </div>
           </div>
@@ -60,10 +77,10 @@ function Login() {
               Đăng nhập
             </button>
           </div>
-          <div className="mt-5 text-gray-500 text-center">
-            <p className="text-sm">&#169;production team 2021</p>
-          </div>
         </form>
+        <div className="mt-5 text-gray-500 text-center">
+          <p className="text-sm">&#169;production team 2021</p>
+        </div>
       </div>
     </div>
   );

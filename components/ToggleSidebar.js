@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import TemporaryDrawer from "./Drawer";
+import { MenuIcon } from "@heroicons/react/outline";
 
 function ToggleSidebar() {
   const [isOpenSidebar, setIsOpenSideBar] = useState(false);
@@ -18,21 +20,26 @@ function ToggleSidebar() {
     >
       {/* top */}
       <div className="flex mt-5 justify-between items-center">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+        <div className="flex items-center">
+          <TemporaryDrawer Icon={MenuIcon} />
+          {/* <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button> */}
+
+          {/* Toogle Drawer */}
         </div>
         {/* search */}
         <div className="flex rounded-md w-full mr-2 ml-2 border-gray-600 brightness-100 bg-white justify-between items-center">
