@@ -26,6 +26,8 @@ const register = async (req, res) => {
 
     const isExistEmployee = await EmployeeModel.findOne({ username });
 
+    console.log("isExistEmployee: "+isExistEmployee);
+
     if (isExistEmployee)
       return res.status(400).json({ err: "This username is already exists." });
 
@@ -44,7 +46,7 @@ const register = async (req, res) => {
     });
 
     console.log("newUSer: " + newEmployee);
-    return res.json({ msg: "Register Success!" });
+    return res.json({ success: "Register Success!" });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

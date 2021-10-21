@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Image from "next/image";
 import logo from "../public/vercel.svg";
-import Toast from "../components/Toast";
+import Notify from "../components/Notify";
+import { UserContext } from "../store/GlobalState";
+import { postData } from '../utils/fetchData';
 
 function Login() {
+  const [state,dispatch] = useContext(UserContext);
   const initState = { username: "", password: "" };
   const [userData, setUserData] = useState(initState);
 
@@ -14,13 +17,21 @@ function Login() {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    console.log(username, password);
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+
+    const res = await postData("auth/login", userData);
+
+    if(res.err) return dispatch({type:"NOTIFY",payload:{error:res.err}})
+
+    return dispatch({type:"NOTIFY",payload:{success:res.success}})
+
   };
 
   return (
     <div className="h-screen bg-gradient-to-r from-blue-400 via-green-400 to-green-300  sm:w-full mx-auto items-center flex justify-center sm:mx-auto">
+      <Notify />
       <div className="bg-white mt-10 shadow rounded-lg px-8 py-8">
         <div className="flex flex-col justify-center items-center mb-5">
           <div>

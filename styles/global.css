@@ -1,3 +1,5 @@
 .react-calendar-timeline {
   z-index: 1;
 }
+
+@import url("./loading.css");

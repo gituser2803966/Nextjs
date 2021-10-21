@@ -24,7 +24,6 @@ function Register() {
   };
 
   const handleSubmit = async (e) => {
-    console.log(firstName, lastName, username, password, cf_password);
     e.preventDefault();
     const errMsg = valid(firstName, lastName, username, password, cf_password);
     if (errMsg) return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
@@ -33,7 +32,10 @@ function Register() {
 
     const res = await postData("auth/register", userData);
 
-    // dispatch({ type: "NOTIFY", payload: { success: "OKKKK" } });
+    if(res.err) return dispatch({type:"NOTIFY",payload:{error:res.err}})
+
+    return dispatch({type:"NOTIFY",payload:{success:res.success}})
+
   };
 
   return (
