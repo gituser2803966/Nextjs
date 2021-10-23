@@ -1,6 +1,6 @@
 import connectDB from "../../../utils/connectDB";
 import EmployeeModel from "../../../models/EmployeeModel";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { createAccessToken,createRefreshToken } from '../../../utils/generateToken';
 
 connectDB();
