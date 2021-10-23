@@ -4,7 +4,7 @@ export const getData = async (url, token) => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: "GET",
     headers: {
-      Authorization: token,
+      "Authorization": token,
     },
   });
 
@@ -17,7 +17,7 @@ export const postData = async (url, postData, token) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      "Authorization": token,
     },
     body: JSON.stringify(postData),
   });
@@ -31,7 +31,7 @@ export const putData = async (url, putData, token) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      "Authorization": token,
     },
     body: JSON.stringify(putData),
   });

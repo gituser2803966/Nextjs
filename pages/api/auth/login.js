@@ -1,6 +1,7 @@
 import connectDB from "../../../utils/connectDB";
 import EmployeeModel from "../../../models/EmployeeModel";
 import bcrypt from "bcrypt";
+import { createAccessToken,createRefreshToken } from '../../../utils/generateToken';
 
 connectDB();
 
@@ -24,7 +25,16 @@ const login = async (req, res) => {
     const isPasswordMatch = await bcrypt.compare(password, employee.password);
     if(!isPasswordMatch)  return res.status(400).json({ err: "Incorrect password." });
 
-    return res.json({ success: "login Success!" });
+
+    const access_token = createAccessToken({id:employee._id});
+    const refresh_token = createRefreshToken({id:employee._id});
+
+    return res.json({ 
+      success: "login Success!",
+      user:employee,
+      access_token,
+      refresh_token
+    });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

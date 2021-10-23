@@ -1,16 +1,21 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext,useEffect } from "react";
 import Image from "next/image";
 import logo from "../public/vercel.svg";
 import Notify from "../components/Notify";
 import { UserContext } from "../store/GlobalState";
 import { postData } from '../utils/fetchData';
+import Cookie  from 'js-cookie';
+import { useRouter } from 'next/router';
 
 function Login() {
+  const route = useRouter();
   const [state,dispatch] = useContext(UserContext);
+  const { auth } = state;
   const initState = { username: "", password: "" };
   const [userData, setUserData] = useState(initState);
 
   const { username, password } = userData;
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +30,28 @@ function Login() {
 
     if(res.err) return dispatch({type:"NOTIFY",payload:{error:res.err}})
 
-    return dispatch({type:"NOTIFY",payload:{success:res.success}})
+
+    dispatch({type:"NOTIFY",payload:{success:res.success}})
+
+    dispatch({type:"AUTH",payload:{
+      token:res.access_token,
+      user:res.user
+    }})
+
+    Cookie.set('refreshToken',res.refresh_token,{
+      path:'api/auth/accessToken',
+      expires:7,
+    });
+
+    localStorage.setItem('firstLogin',true);
 
   };
+
+
+
+  useEffect(()=>{
+    if(Object.keys(auth).length !== 0) route.push("/data")
+  },[auth])
 
   return (
     <div className="h-screen bg-gradient-to-r from-blue-400 via-green-400 to-green-300  sm:w-full mx-auto items-center flex justify-center sm:mx-auto">
