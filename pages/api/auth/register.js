@@ -22,11 +22,7 @@ const register = async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 12);
 
-    console.log("passwordHash: " + passwordHash);
-
-    const isExistEmployee = await EmployeeModel.findOne({ username });
-
-    console.log("isExistEmployee: "+isExistEmployee);
+    const isExistEmployee = await EmployeeModel.findOne({ username }); 
 
     if (isExistEmployee)
       return res.status(400).json({ err: "This username is already exists." });
@@ -38,14 +34,12 @@ const register = async (req, res) => {
       password: passwordHash,
     });
 
-    console.log("save user");
     await newEmployee.save((el, err) => {
       if (err) {
         console.log(err);
       }
     });
 
-    console.log("newUSer: " + newEmployee);
     return res.json({ success: "Register Success!" });
   } catch (err) {
     return res.status(500).json({ err: err.message });

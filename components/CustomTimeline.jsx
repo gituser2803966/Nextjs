@@ -3,7 +3,7 @@ import moment from "moment";
 import 'react-calendar-timeline/lib/Timeline.css'
 import Timeline from "react-calendar-timeline";
 
-import generateFakeData from "../fake-data/generateFakeData";
+import generateTimelineData from "../utils/generateTimelineData";
 
 var keys = {
   groupIdKey: "id",
@@ -22,7 +22,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    const { groups, items } = generateFakeData();
+    const { groups, items } = generateTimelineData();
+
     const defaultTimeStart = moment()
       .startOf("day")
       .toDate();

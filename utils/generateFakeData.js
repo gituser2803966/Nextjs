@@ -10,6 +10,7 @@ export default function generateFakeData(
 ) {
   let randomSeed = Math.floor(Math.random() * 1000);
   let groups = [];
+  
   for (let i = 0; i < groupCount; i++) {
     groups.push({
       id: `${i + 1}`,
@@ -26,12 +27,12 @@ export default function generateFakeData(
     const startValue =
       Math.floor(moment(startDate).valueOf() / 10000000) * 10000000;
     const endValue = moment(
-      startDate + faker.random.number({ min: 2, max: 20 }) * 15 * 60 * 1000
+      startDate + faker.datatype.number({ min: 2, max: 20 }) * 15 * 60 * 1000
     ).valueOf();
 
     items.push({
       id: i + "",
-      group: faker.random.number({ min: 1, max: groups.length }) + "",
+      group: faker.datatype.number({ min: 1, max: groups.length }) + "",
       title: faker.hacker.phrase(),
       start: startValue,
       end: endValue,

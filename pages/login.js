@@ -4,7 +4,7 @@ import logo from "../public/vercel.svg";
 import Notify from "../components/Notify";
 import { UserContext } from "../store/GlobalState";
 import { postData } from '../utils/fetchData';
-import Cookie  from 'js-cookie';
+import Cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 
 function Login() {
@@ -46,8 +46,6 @@ function Login() {
     localStorage.setItem('firstLogin',true);
 
   };
-
-
 
   useEffect(()=>{
     if(Object.keys(auth).length !== 0) route.push("/data")

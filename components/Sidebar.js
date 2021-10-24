@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 import { useRouter } from "next/router";
 
 import SidebarItem from "../components/SidebarItem";
@@ -9,12 +9,16 @@ import {
   ChartSquareBarIcon,
   CalendarIcon,
 } from "@heroicons/react/outline";
+import SettingDialogs from "./SettingDialog";
 
 import { UserCircleIcon } from "@heroicons/react/solid";
-import { route } from "next/dist/server/router";
 
 function Sidebar() {
-  route = useRouter();
+
+  const [isOpenSettingDialog, setIsOpenSettingDialog] = useState(false);
+
+  const route = useRouter();
+
   const goToPage = (page) => {
     route.push("/" + page);
   };
@@ -40,7 +44,10 @@ function Sidebar() {
         </div>
 
         <div className="justify-self-end">
-          <SidebarItem Icon={UserCircleIcon} />
+          <button onClick={()=>setIsOpenSettingDialog(!isOpenSettingDialog)}>
+             <SidebarItem Icon={UserCircleIcon} />
+          </button>
+          <SettingDialogs isOpen={isOpenSettingDialog} handleClose={()=>setIsOpenSettingDialog(!isOpenSettingDialog)}/>
         </div>
       </div>
       {/* content */}
